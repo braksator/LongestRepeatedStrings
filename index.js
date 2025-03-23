@@ -14,8 +14,9 @@ let lrs = module.exports = {
   wordBound: (txt, string) => !!txt.match(new RegExp(`[^a-zA-Z0-9\\s\n]${string}|\\n${string}`, 'g')),
 
   // Finds repeated strings in a piece of text.
-  text: (txt, maxRes = 100, minLen = 4, maxLen = 30, minOcc = 3, omit = [], wb = false) => {
-    let cleanedText = txt.replace(/[^\w]/g, ' '), words = cleanedText.split(/\s+/), substrings = {};
+  text: (txt, opts) => {
+    let cleanedText = txt.replace(/[^\w]/g, ' '), words = cleanedText.split(/\s+/), substrings = {},
+      defaults = {maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], wb: false}, opts = { ...defaults, ...opts };
     for (let len = maxLen; len >= minLen; len--) {
       for (let word of words) {
         if (word.length === len) {
@@ -44,9 +45,9 @@ let lrs = module.exports = {
   },
 
   // Finds results in files.
-  files: (files, maxRes = 100, minLen = 4, maxLen = 30, minOcc = 3, omit = [], wb = false) => {
+  files: (files, opts) => {
     let ret = {};
-    files.forEach(f => ret[f] = text(fs.readFileSync(f, { encoding: 'utf8', flag: 'r' }), maxRes, minLen, maxLen, minOcc, omit, wb));
+    files.forEach(f => ret[f] = text(fs.readFileSync(f, { encoding: 'utf8', flag: 'r' }), opts));
     return ret;
   },
 

@@ -13,7 +13,7 @@ Generates a report about the longest repeated substrings in supplied text, weigh
 
 This is a Node.JS module available from the Node Package Manager (NPM).
 
-https://www.npmjs.com/package/minson
+https://www.npmjs.com/package/longestrepeatedstrings
 
 Here's the command to download and install from NPM:
 
@@ -28,7 +28,7 @@ introduced into this project that makes it incompatible with your encoded data.
 
 ## Usage
 
-Include Longest Repeated Substrings in your project:
+Include Longest Repeated Strings in your project:
 
 ```javascript
 var LRS = require('longestrepeatedstrings');
@@ -40,18 +40,19 @@ You can analyze a single text by using the `text` function to find the longest r
 
 ```javascript
 const text = 'Your text content goes here';
-const results = LRS.text(text, maxRes = 100, minLen = 4, maxLen = 30, minOcc = 3, omit = [], wordBound = null);
+const results = LRS.text(text, { maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], wb: false });
 console.log(results);
 ```
 
 **Parameters**:
 - `text` (String): The input text to analyze.
-- `maxRes` (Number, optional, default: 100): The maximum number of results to return.
-- `minLen` (Number, optional, default: 4): The minimum length of substrings to consider.
-- `maxLen` (Number, optional, default: 30): The maximum length of substrings to consider.
-- `minOcc` (Number, optional, default: 3): The minimum number of occurrences a substring must have to be included.
-- `omit` (Array, optional, default: []): An array of substrings to omit from the results.
-- `wordBound` (Function, optional, default: null): A function to restrict matches to word boundaries. If provided, the substrings will be filtered based on this function.
+- `opts` (Object, optional): A configuration object with the following properties:
+  - `maxRes` (Number, default: 100): The maximum number of results to return.
+  - `minLen` (Number, default: 4): The minimum length of substrings to consider.
+  - `maxLen` (Number, default: 30): The maximum length of substrings to consider.
+  - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
+  - `omit` (Array, default: `[]`): An array of substrings to omit from the results.
+  - `wb` (Boolean, default: `false`): If `true`, restricts matches to word boundaries.
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
 
@@ -62,60 +63,57 @@ You can analyze multiple files by using the `files` function. This will read the
 ```javascript
 const fs = require('fs');
 const files = ['file1.txt', 'file2.txt'];
-const results = LRS.files(files, maxRes = 100, minLen = 4, maxLen = 30, minOcc = 3, omit = [], wordBound = null);
+const results = LRS.files(files, { maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], wb: false });
 console.log(results);
 ```
 
 **Parameters**:
 - `files` (Array): An array of file paths to analyze.
-- `maxRes`, `minLen`, `maxLen`, `minOcc`, `omit`: Same as the parameters for the `text` function.
-- `wordBound` (Function, optional, default: null): A function to restrict matches to word boundaries.
+- `opts` (Object, optional): Same options as in the `text` function.
 
 **Returns**: An object where the keys are file names and the values are the repeated substrings found in each file.
 
 ### Creating Reports
 
-You can generate a text report for the analysis results using the `filesReport` and `textReport` functions.
-
 #### File Analysis Report
 
 ```javascript
-const report = LRS.filesReport(results, out = 0); // Pass `out = 1` to log to console
+const report = LRS.filesReport(results, 1); // Pass `1` to log to console
 console.log(report);
 ```
 
 **Parameters**:
 - `results` (Object): The results returned by the `files` function.
-- `out` (Number, optional, default: 0): If set to `1`, the report will be logged to the console instead of being returned as a string.
+- `out` (Number, optional, default: `0`): If set to `1`, the report will be logged to the console instead of being returned as a string.
 
 **Returns**: A text report summarizing the repeated substrings found in each file.
 
 #### Text Analysis Report
 
 ```javascript
-const report = LRS.textReport(results, out = 0); // Pass `out = 1` to log to console
+const report = LRS.textReport(results, 1); // Pass `1` to log to console
 console.log(report);
 ```
 
 **Parameters**:
 - `results` (Array): The results returned by the `text` function.
-- `out` (Number, optional, default: 0): If set to `1`, the report will be logged to the console instead of being returned as an array.
+- `out` (Number, optional, default: `0`): If set to `1`, the report will be logged to the console instead of being returned as an array.
 
 **Returns**: A list of repeated substrings with their occurrence counts.
 
 ### Example Workflow
 
-1. First, you analyze a single text:
+1. First, analyze a single text:
    ```javascript
    const text = 'This is an example text with repeated substrings';
    const results = LRS.text(text);
    ```
-2. Then, you analyze multiple files:
+2. Then, analyze multiple files:
    ```javascript
    const files = ['file1.txt', 'file2.txt'];
    const results = LRS.files(files);
    ```
-3. Afterward, you can generate a report:
+3. Afterward, generate a report:
    ```javascript
    const report = LRS.filesReport(results, 1); // Logs the report to console
    ```
@@ -125,7 +123,7 @@ console.log(report);
 - The `text` and `files` functions automatically clean the text by removing non-alphanumeric characters and splitting it into words.
 - Results are sorted by a score, which is calculated based on the length of the substring and the number of occurrences.
 - You can omit specific substrings by passing them in the `omit` array.
-- The `wordBound` function is an optional filter that can be passed to restrict substring matches to word boundaries. If omitted, the function defaults to allowing all matches.
+- The `wb` option can be set to `true` to restrict substring matches to word boundaries.
 
 
 ## Contributing
