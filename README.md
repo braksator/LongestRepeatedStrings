@@ -130,7 +130,7 @@ console.log(report);
 
 ## Contributing
 
-https://github.com/braksator/minson
+https://github.com/braksator/LongestRepeatedStrings
 
 In lieu of a formal style guide, take care to maintain the existing coding
 style. Add tests for coverage and explicitly test bugs and features.
