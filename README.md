@@ -118,17 +118,17 @@ console.log(report);
 
 ### Example Workflow
 
-1. First, analyze a single text:
+1a. Either, analyze a single text:
    ```javascript
    const text = 'This is an example text with repeated substrings';
    const results = LRS.text(text);
    ```
-2. Then, analyze multiple files:
+1b. Or alternatively, analyze multiple files:
    ```javascript
    const files = ['file1.txt', 'file2.txt'];
    const results = LRS.files(files);
    ```
-3. Afterward, generate a report:
+2. Afterward, generate a report:
    ```javascript
    const report = LRS.filesReport(results, 1); // Logs the report to console
    ```
