@@ -138,10 +138,7 @@ console.log(report);
 
 ### Notes
 
-- The `text` and `files` functions clean the text by removing non-alphanumeric characters and splitting it into words, can be optionally disabled.
 - Results are sorted by a score, which is calculated based on the length of the substring and the number of occurrences.
-- You can omit specific substrings by passing them in the `omit` array.
-- The `wb` option can be set to `true` to restrict substring matches to word boundaries.
 
 
 ## Contributing
