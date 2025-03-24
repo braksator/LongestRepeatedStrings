@@ -13,7 +13,7 @@ Generates a report about the longest repeated substrings in supplied text, weigh
 
 ## Stand-alone usage
 
-See online demo link above, or download project files and open index.html to use the GUI.
+See online demo link above, or [download project zip file](https://github.com/braksator/LongestRepeatedStrings/releases/) and open index.html to use the GUI.
 
 ## Installation
 
