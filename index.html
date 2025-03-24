@@ -21,14 +21,15 @@
     <input type="file" id="fileInput" multiple>
     <div class="opts">
       <h2>Options</h2>
-      <label>Min match length: <input type="number" id="minLen" value="4"></label>
-      <label>Max match length: <input type="number" id="maxLen" value="120"></label>
+      <label class="hr">Min match length: <input type="number" id="minLen" value="4"></label>
+      <label class="hr">Max match length: <input type="number" id="maxLen" value="120"></label>
       <br>
-      <label>Min occurrences: <input type="number" id="minOcc" value="3"></label>
-      <label>Max results: <input type="number" id="maxRes" value="50"></label>
+      <label class="hr">Min occurrences: <input type="number" id="minOcc" value="3"></label>
+      <label class="hr">Max results: <input type="number" id="maxRes" value="50"></label>
       <br>
       <label>Words to omit (one per line):</label>
-      <textarea id="omit" style="height: 40px; field-sizing: content;"></textarea>
+      <br>
+      <textarea id="omit" style="height: 40px; field-sizing: content; width: 50%;"></textarea>
       <br>
       <label><input type="checkbox" id="trim"> Trim whitespace</label>
       <label><input type="checkbox" id="cleanText"> Break word on and ignore symbols</label>
@@ -50,7 +51,8 @@
     input, button { margin: 5px; padding: .25em; }
     button, input[type=file] { font-size: 24px; }
     input[type=number] { width: 50px; }
-    label { font-variant: small-caps; }
+    label { font-variant: small-caps; line-height: 2em; }
+    .hr { width: 25%; display: inline-block; text-align: right; }
     .results { text-align: left; padding: 1em; background: #ececad; white-space: pre-wrap; }
     h3 { font-size: 14px; text-align: left; background: #ececad; position: relative; font-variant: small-caps; margin: 20px 0 0 0; padding: .5em; user-select: none; color: #444; }
     footer { margin-top: 20px; font-size: 12px; color: #666; background: #fff; max-width: 960px; padding: .2em; margin: 1em auto; border-radius: 3px; opacity: .6 }
