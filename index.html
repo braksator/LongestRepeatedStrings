@@ -41,7 +41,7 @@
     <div class="opts">
       <h2>Options</h2>
       <label>Min match length: <input type="number" id="minLen" value="4"></label>
-      <label>Max match length: <input type="number" id="maxLen" value="30"></label>
+      <label>Max match length: <input type="number" id="maxLen" value="120"></label>
       <br>
       <label>Min occurrences: <input type="number" id="minOcc" value="3"></label>
       <label>Max results: <input type="number" id="maxRes" value="50"></label>
@@ -73,17 +73,19 @@
     }
     function analyzeText() {
       let text = document.getElementById('textInput').value;
-      if (!text) return alert("Please enter some text!");
-      document.getElementById('results').innerText = lrs.textReport(lrs.text(text, getOpts()));
+      results.innerText = text ? '⌛ Processing...' : '⚠️ No input text supplied!';
+      let res = lrs.textReport(lrs.text(text, getOpts()));
+      document.getElementById('results').innerText = res ? res : '📄 No results.';
     }
     function analyze() {
       let files = document.getElementById('fileInput').files, results = document.getElementById('results');
-      results.innerText = '';
+      results.innerText = '⌛ Processing...';
       if (!files.length) return analyzeText();
       [...files].forEach(file => {
         let reader = new FileReader();
         reader.onload = () => {
-          results.innerText += `\r\nAnalysis of repeated strings in "${file.name}": ` + lrs.textReport(lrs.text(reader.result, getOpts()));
+          let res = lrs.textReport(lrs.text(reader.result, getOpts()));
+          results.innerText += `📄 Analysis of repeated strings in "${file.name}": ${res ? res : 'No results.'} \r\n`;
         };
         reader.readAsText(file);
       });

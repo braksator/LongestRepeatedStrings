@@ -12,7 +12,7 @@ let lrs = module.exports = {
 
   // Finds repeated substrings in a piece of text.
   text: (txt, opts) => {
-    let defaults = { maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], clean: true, wb: true, words: true };
+    let defaults = { maxRes: 50, minLen: 4, maxLen: 120, minOcc: 3, omit: [], clean: 0, wb: 0, words: 0 };
     opts = { ...defaults, ...opts };
     let cleanedText = opts.clean ? txt.replace(/[^\w]/g, ' ') : txt,
       strings = {},
@@ -50,14 +50,15 @@ let lrs = module.exports = {
 
   // Creates a text report for files analysis, with optional console output.
   filesReport: (results, out = 0) => Object.entries(results).map(([filename, res]) => {
-    let output = `\r\nAnalysis of repeated strings in "${filename}": ` + textReport(res).join(', ');
+    let res = textReport(res).join(', '),
+      output = `📄 Analysis of repeated strings in "${filename}": ${res ? res : 'No results.'}\r\n`;
     out && console.log(output);
     return output;
   }).join(''),
 
   // Creates a text report for text analysis, with optional console output.
   textReport: (results, out = 0) => {
-    let output = Array.from(new Set(results.map(result => `${result.substring} (${result.count}x)`))).join(', ');
+    let output = Array.from(new Set(results.map(result => `${result.substring} (${result.count}x)`))).join(', ') || '📄 No results.';
     out && console.log(output);
     return output;
   }
