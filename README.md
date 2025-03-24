@@ -58,10 +58,10 @@ console.log(results);
   - `maxLen` (Number, default: 120): The maximum length of substrings to consider.
   - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results.
-  - `trim` (Boolean, default: `false`): If `true`, Trims whitespace from results.
-  - `clean` (Boolean, default: `false`): If `true`, Break match on symbols.
-  - `words` (Boolean, default: `false`): If `true`, Find only whole words.
-  - `wb` (Boolean, default: `false`): If `true`, Restricts matches to word boundaries.
+  - `trim` (Boolean, default: `false`): If `true`, trims whitespace from results.
+  - `clean` (Boolean, default: `false`): If `true`, break match on symbols.
+  - `words` (Boolean, default: `false`): If `true`, find only whole words.
+  - `wb` (Boolean, default: `false`): If `true`, restricts matches to word boundaries.
 
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
@@ -112,10 +112,7 @@ console.log(report);
 **Parameters**:
 - `results` (Array): The results returned by the `text` function.
 - `out` (Number, optional, default: `0`): If set to `1`, the report will be logged to the console too.
-- `chars` (Object, optional): A configuration object with the following properties:
-  - `delim` (String, default: '★'): Character/s to insert between each result.
-  - `open` (String, default: '⦅'): Character/s to insert before the repeat count.
-  - `close` (String, default: '×⦆'): Character/s to insert after the repeat count.
+- `chars` (Object, optional): Same options as in the `filesReport` function.
 
 **Returns**: A list of repeated substrings with their occurrence counts.
 
