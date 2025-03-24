@@ -108,6 +108,10 @@ console.log(report);
 **Parameters**:
 - `results` (Array): The results returned by the `text` function.
 - `out` (Number, optional, default: `0`): If set to `1`, the report will be logged to the console instead of being returned as an array.
+- `chars` (Object, optional): A configuration object with the following properties:
+  - `delim` (String, default: '★'): Character/s to insert between each result.
+  - `open` (String, default: '⦅'): Character/s to insert before the repeat count.
+  - `close` (String, default: '×⦆'): Character/s to insert after the repeat count.
 
 **Returns**: A list of repeated substrings with their occurrence counts.
 
