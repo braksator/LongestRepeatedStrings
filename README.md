@@ -118,12 +118,12 @@ console.log(report);
 
 ### Example Workflow
 
-1a. Either, analyze a single text:
+1. Either, analyze a single text or multiple files:
    ```javascript
    const text = 'This is an example text with repeated substrings';
    const results = LRS.text(text);
    ```
-1b. Or alternatively, analyze multiple files:
+   or
    ```javascript
    const files = ['file1.txt', 'file2.txt'];
    const results = LRS.files(files);
