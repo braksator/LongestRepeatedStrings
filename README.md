@@ -58,6 +58,7 @@ console.log(results);
   - `maxLen` (Number, default: 120): The maximum length of substrings to consider.
   - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results.
+  - `trim` (Boolean, default: `false`): If `true`, Trims whitespace from results.
   - `clean` (Boolean, default: `false`): If `true`, Break word on and ignore symbols.
   - `words` (Boolean, default: `false`): If `true`, Find only whole words.
   - `wb` (Boolean, default: `false`): If `true`, Restricts matches to word boundaries.

@@ -12,7 +12,7 @@ let lrs = module.exports = {
 
   // Finds repeated substrings in a piece of text.
   text: (txt, opts) => {
-    let defaults = { maxRes: 50, minLen: 4, maxLen: 120, minOcc: 3, omit: [], clean: 0, wb: 0, words: 0 };
+    let defaults = { maxRes: 50, minLen: 4, maxLen: 120, minOcc: 3, omit: [], trim: 0, clean: 0, wb: 0, words: 0 };
     opts = { ...defaults, ...opts };
     let cleanedText = opts.clean ? txt.replace(/[^\w]/g, ' ') : txt,
       strings = {},
@@ -27,9 +27,10 @@ let lrs = module.exports = {
         }
       }
     }
-    let res = Object.keys(strings)
-      .filter(substr => strings[substr] >= opts.minOcc && (!opts.wb || !!txt.match(new RegExp(`[^a-zA-Z0-9\\s\n]${substr}|\\n${substr}`, 'g'))) && !opts.omit.includes(substr.toLowerCase()))
+    let esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), res = Object.keys(strings)
+      .filter(substr => strings[substr] >= opts.minOcc && (!opts.wb || !!txt.match(new RegExp(`[^a-zA-Z0-9\\s\n]${esc(substr)}|\\n${esc(substr)}`, 'g'))) && !opts.omit.includes(substr.toLowerCase()))
       .map(substr => ({substring: substr, count: strings[substr], score: Math.max(1, (substr.length - 3)) * Math.max(1, strings[substr] - 1)}));
+    if (opts.trim) res = res.map(obj => ({...obj, substring: obj.substring.trim()})).filter(obj => obj.substring !== "");
     res.sort((a, b) => b.score - a.score);
     let ret = [], seen = new Set();
     for (let r of res) {
@@ -50,8 +51,8 @@ let lrs = module.exports = {
 
   // Creates a text report for files analysis, with optional console output.
   filesReport: (results, out = 0) => Object.entries(results).map(([filename, res]) => {
-    let res = textReport(res).join(', '),
-      output = `📄 Analysis of repeated strings in "${filename}": ${res ? res : 'No results.'}\r\n`;
+    let ret = textReport(res).join(', '),
+      output = `📄 Analysis of repeated strings in "${filename}": ${ret ? ret : 'No results.'}\r\n`;
     out && console.log(output);
     return output;
   }).join(''),

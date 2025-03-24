@@ -11,25 +11,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="16.png">
   <link rel="manifest" href="site.webmanifest">
-  <style>
-    html, body { min-height: 100%; }
-    body { font-family: Futura, "Trebuchet MS", Arial, sans-serif; text-align: center; padding: 1em; background: repeating-linear-gradient(-45deg,#efefef,#efefef 5px,#fefefe 6px,#efefef 20px); }
-    h1, h2 { font-size: 32px; font-family: "Winky Sans", sans-serif; font-weight: bold; }
-    h2 { font-size: 24px; margin: 0 0 .5em 0; }
-    .container { max-width: 960px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px #aaa; }
-    textarea { width: 100%; height: 100px; max-width: 100%;  }
-    input, button { margin: 5px; padding: .25em; }
-    button, input[type=file] { font-size: 24px; }
-    input[type=number] { width: 50px; }
-    label { font-variant: small-caps; }
-    .results { text-align: left; padding: 1em; background: #ececad; }
-    h3 { font-size: 14px; text-align: left; background: #ececad; position: relative; font-variant: small-caps; margin: 20px 0 0 0; padding: .5em; user-select: none; color: #444; }
-    footer { margin-top: 20px; font-size: 12px; color: #666; background: #fff; max-width: 960px; padding: .2em; margin: 1em auto; border-radius: 3px; opacity: .6 }
-    .opts { background-color: #f2f2f2; padding: 1em; margin: 1em; border-radius: 10px }
-    a { color: #bbb; }
-    .analyze { padding: .25em 2em; color: #fff; background: #369c17; border: 0; border-radius: 5px; &:hover { background: #40aa20;} }
-    .intro { opacity: .4; font-size: 1.2em; font-style: italic; }
-  </style>
 </head>
 <body>
   <div class="container">
@@ -49,15 +30,35 @@
       <label>Words to omit (one per line):</label>
       <textarea id="omit" style="height: 40px; field-sizing: content;"></textarea>
       <br>
-      <label><input type="checkbox" id="cleanText" checked> Break word on and ignore symbols</label>
-      <label><input type="checkbox" id="splitWords" checked> Find only whole words</label>
-      <label><input type="checkbox" id="wordBound" checked> Word Boundaries</label>
+      <label><input type="checkbox" id="trim"> Trim whitespace</label>
+      <label><input type="checkbox" id="cleanText"> Break word on and ignore symbols</label>
+      <label><input type="checkbox" id="splitWords"> Find only whole words</label>
+      <label><input type="checkbox" id="wordBound"> Word Boundaries</label>
     </div>
     <button class="analyze" onclick="analyze()">Analyze</button>
     <h3>Results:</h3>
     <div class="results" id="results"></div>
   </div>
   <footer>Created Mar 2025 by D.A. Braksator. <a href="https://github.com/braksator/LongestRepeatedStrings">Github repo</a></footer>
+  <style>
+    html, body { min-height: 100%; }
+    body { font-family: Futura, "Trebuchet MS", Arial, sans-serif; text-align: center; padding: 1em; background: repeating-linear-gradient(-45deg,#efefef,#efefef 5px,#fefefe 6px,#efefef 20px); }
+    h1, h2 { font-size: 32px; font-family: "Winky Sans", sans-serif; font-weight: bold; }
+    h2 { font-size: 24px; margin: 0 0 .5em 0; }
+    .container { max-width: 960px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px #aaa; }
+    textarea { width: 100%; height: 100px; max-width: 100%;  }
+    input, button { margin: 5px; padding: .25em; }
+    button, input[type=file] { font-size: 24px; }
+    input[type=number] { width: 50px; }
+    label { font-variant: small-caps; }
+    .results { text-align: left; padding: 1em; background: #ececad; white-space: pre-wrap; }
+    h3 { font-size: 14px; text-align: left; background: #ececad; position: relative; font-variant: small-caps; margin: 20px 0 0 0; padding: .5em; user-select: none; color: #444; }
+    footer { margin-top: 20px; font-size: 12px; color: #666; background: #fff; max-width: 960px; padding: .2em; margin: 1em auto; border-radius: 3px; opacity: .6 }
+    .opts { background-color: #f2f2f2; padding: 1em; margin: 1em; border-radius: 10px }
+    a { color: #bbb; }
+    .analyze { padding: .25em 2em; color: #fff; background: #369c17; border: 0; border-radius: 5px; &:hover { background: #40aa20;} }
+    .intro { opacity: .4; font-size: 1.2em; font-style: italic; }
+  </style>
   <script>
     function getOpts() {
       return opts = {
@@ -66,16 +67,17 @@
         minOcc: +document.getElementById('minOcc').value,
         maxRes: +document.getElementById('maxRes').value,
         omit: document.getElementById('omit').value.split('\n').map(o => o.trim()).filter(Boolean),
+        trim: document.getElementById('trim').checked,
         clean: document.getElementById('cleanText').checked,
         splitWords: document.getElementById('splitWords').checked,
         wb: document.getElementById('wordBound').checked,
       };
     }
     function analyzeText() {
-      let text = document.getElementById('textInput').value;
+      let text = document.getElementById('textInput').value, results = document.getElementById('results');
       results.innerText = text ? '⌛ Processing...' : '⚠️ No input text supplied!';
       let res = lrs.textReport(lrs.text(text, getOpts()));
-      document.getElementById('results').innerText = res ? res : '📄 No results.';
+      results.innerText = res ? res : '📄 No results.';
     }
     function analyze() {
       let files = document.getElementById('fileInput').files, results = document.getElementById('results');
