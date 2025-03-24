@@ -59,7 +59,7 @@ console.log(results);
   - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results.
   - `trim` (Boolean, default: `false`): If `true`, Trims whitespace from results.
-  - `clean` (Boolean, default: `false`): If `true`, Break word on and ignore symbols.
+  - `clean` (Boolean, default: `false`): If `true`, Break match on symbols.
   - `words` (Boolean, default: `false`): If `true`, Find only whole words.
   - `wb` (Boolean, default: `false`): If `true`, Restricts matches to word boundaries.
 
