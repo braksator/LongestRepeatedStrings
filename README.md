@@ -1,13 +1,19 @@
 [![npm](https://img.shields.io/npm/dt/longestrepeatedstrings.svg)](#)
 
-LONGEST REPEATED STRINGS
-===========================
+Longest Repeated Strings
+========================
 
 Generates a report about the longest repeated substrings in supplied text, weighted by how much space the string takes up overall (length * occurences).
 
 > You input text or filenames.  It returns raw data or a text report.
 
+🧵 [Try an online demo](http://braksator.github.io/lrs)
+
 (This module was designed to analyze javascript code for refactoring opportunities)
+
+## Stand-alone usage
+
+See online demo link above, or download project files and open index.html to use the GUI.
 
 ## Installation
 
@@ -40,7 +46,7 @@ You can analyze a single text by using the `text` function to find the longest r
 
 ```javascript
 const text = 'Your text content goes here';
-const results = LRS.text(text, { maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], wb: false });
+const results = LRS.text(text, { maxRes: 20, minLen: 8 });
 console.log(results);
 ```
 
@@ -52,7 +58,10 @@ console.log(results);
   - `maxLen` (Number, default: 30): The maximum length of substrings to consider.
   - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results.
-  - `wb` (Boolean, default: `false`): If `true`, restricts matches to word boundaries.
+  - `clean` (Boolean, default: `true`): If `true`, Break word on and ignore symbols.
+  - `words` (Boolean, default: `true`): If `true`, Find only whole words.
+  - `wb` (Boolean, default: `true`): If `true`, Restricts matches to word boundaries.
+
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
 
@@ -63,7 +72,7 @@ You can analyze multiple files by using the `files` function. This will read the
 ```javascript
 const fs = require('fs');
 const files = ['file1.txt', 'file2.txt'];
-const results = LRS.files(files, { maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], wb: false });
+const results = LRS.files(files, opts);
 console.log(results);
 ```
 
@@ -120,7 +129,7 @@ console.log(report);
 
 ### Notes
 
-- The `text` and `files` functions automatically clean the text by removing non-alphanumeric characters and splitting it into words.
+- The `text` and `files` functions clean the text by removing non-alphanumeric characters and splitting it into words, can be optionally disabled.
 - Results are sorted by a score, which is calculated based on the length of the substring and the number of occurrences.
 - You can omit specific substrings by passing them in the `omit` array.
 - The `wb` option can be set to `true` to restrict substring matches to word boundaries.

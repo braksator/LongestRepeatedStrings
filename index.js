@@ -10,38 +10,35 @@ let fs = require('fs');
 
 let lrs = module.exports = {
 
-  // Restricts matches to word boundaries.
-  wordBound: (txt, string) => !!txt.match(new RegExp(`[^a-zA-Z0-9\\s\n]${string}|\\n${string}`, 'g')),
-
-  // Finds repeated strings in a piece of text.
+  // Finds repeated substrings in a piece of text.
   text: (txt, opts) => {
-    let cleanedText = txt.replace(/[^\w]/g, ' '), words = cleanedText.split(/\s+/), substrings = {},
-      defaults = {maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], wb: false}, opts = { ...defaults, ...opts };
-    for (let len = maxLen; len >= minLen; len--) {
-      for (let word of words) {
-        if (word.length === len) {
-          if (!substrings[word]) substrings[word] = 0;
-          substrings[word]++;
+    let defaults = { maxRes: 100, minLen: 4, maxLen: 30, minOcc: 3, omit: [], clean: true, wb: true, words: true };
+    opts = { ...defaults, ...opts };
+    let cleanedText = opts.clean ? txt.replace(/[^\w]/g, ' ') : txt,
+      strings = {},
+      text = opts.words ? cleanedText.split(/\s+/) : [cleanedText];
+    for (let seg of text) {
+      let len = seg.length;
+      for (let i = 0; i <= len - opts.minLen; i++) {
+        for (let j = opts.minLen; j <= opts.maxLen && i + j <= len; j++) {
+          let substr = seg.substring(i, i + j);
+          if (!strings[substr]) strings[substr] = 0;
+          strings[substr]++;
         }
       }
     }
-    let results = Object.keys(substrings)
-      .filter(substring => substrings[substring] >= minOcc && (!wb || wordBound(txt, substring)) && !omit.includes(substring.toLowerCase()))
-      .map(substring => ({
-        substring: substring,
-        count: substrings[substring],
-        score: Math.max(1, (substring.length - 3)) * Math.max(1, substrings[substring] - 1)
-      }));
-    results.sort((a, b) => b.score - a.score);
-    let filteredResults = [],
-      seen = new Set();
-    for (let result of results) {
-      if (![...seen].some(s => s.includes(result.substring))) {
-        filteredResults.push(result);
-        seen.add(result.substring);
+    let res = Object.keys(strings)
+      .filter(substr => strings[substr] >= opts.minOcc && (!opts.wb || !!txt.match(new RegExp(`[^a-zA-Z0-9\\s\n]${substr}|\\n${substr}`, 'g'))) && !opts.omit.includes(substr.toLowerCase()))
+      .map(substr => ({substring: substr, count: strings[substr], score: Math.max(1, (substr.length - 3)) * Math.max(1, strings[substr] - 1)}));
+    res.sort((a, b) => b.score - a.score);
+    let ret = [], seen = new Set();
+    for (let r of res) {
+      if (![...seen].some(s => s.includes(r.substring))) {
+        ret.push(r);
+        seen.add(r.substring);
       }
     }
-    return filteredResults.sort((a, b) => b.score - a.score).slice(0, maxRes);
+    return ret.slice(0, opts.maxRes);
   },
 
   // Finds results in files.
@@ -60,7 +57,7 @@ let lrs = module.exports = {
 
   // Creates a text report for text analysis, with optional console output.
   textReport: (results, out = 0) => {
-    let output = Array.from(new Set(results.map(result => `${result.substring} (${result.count}x)`)));
+    let output = Array.from(new Set(results.map(result => `${result.substring} (${result.count}x)`))).join(', ');
     out && console.log(output);
     return output;
   }
