@@ -3,9 +3,11 @@
 Longest Repeated Strings
 ========================
 
-Generates a report about the longest repeated substrings in supplied text, weighted by how much space the string takes up overall (length * occurences).
+Finds ***duplicated text*** and generates a report about the ***longest substrings*** or
+***most frequent words*** in supplied text, weighted by how much space the string
+takes up overall (length * occurences).
 
-> You input text or filenames.  It returns raw data or a text report.
+> You supply input text or files.  It returns raw data or a text report.
 
 🧵 [Try an online demo](http://braksator.github.io/lrs)
 
