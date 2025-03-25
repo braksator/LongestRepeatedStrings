@@ -1,6 +1,6 @@
 {
   "name": "longestrepeatedstrings",
-  "version": "1.0.1-a",
+  "version": "1.0.1",
   "description": "Generates a report about the longest repeated substrings in supplied text.",
   "main": "index.js",
   "scripts": {
