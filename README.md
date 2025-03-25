@@ -67,7 +67,7 @@ console.log(results);
   - `wb` (Boolean, default: `false`): If `true`, restricts matches to word boundaries.
   - `break` (Array, default: `[]`): An array of substrings to break matching on.
   Can be used to concatenate an array of texts with a special char.
-  - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.  You'd probably want this to be minLen or higher.
+  - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
 
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
