@@ -62,6 +62,7 @@ console.log(results);
   - `clean` (Boolean, default: `false`): If `true`, break match on symbols.
   - `words` (Boolean, default: `false`): If `true`, find only whole words.
   - `wb` (Boolean, default: `false`): If `true`, restricts matches to word boundaries.
+  - `break` (Array, default: []): An array of substrings to break matching on.
 
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
