@@ -12,7 +12,7 @@ let lrs = module.exports = {
 
   // Finds repeated substrings in a piece of text.
   text: (txt, opts) => {
-    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 120, minOcc: 3, omit: [], trim: 0, clean: 0, wb: 0, words: 0, break: [] }, ...opts };
+    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 120, minOcc: 3, omit: [], trim: 0, clean: 0, wb: 0, words: 0, break: [], penalty: 0 }, ...opts };
     let cleanedText = opts.clean ? txt.replace(/[^\w]/g, ' ') : txt,
       strings = {},
       text = opts.words ? cleanedText.split(/\s+/) : [cleanedText];
@@ -37,7 +37,7 @@ let lrs = module.exports = {
           (!opts.wb || !!txt.match(new RegExp(`[^a-zA-Z0-9\\s\n]${esc(substr)}|\\n${esc(substr)}`, 'g'))) &&
           !opts.omit.includes(substr.toLowerCase())
         )
-        .map(substr => ({ substring: substr, count: strings[substr], score: substr.length * strings[substr] }));
+        .map(substr => ({ substring: substr, count: strings[substr], score: (substr.length - opts.penalty) * strings[substr] }));
     if (opts.trim) res = res.map(obj => ({ ...obj, substring: obj.substring.trim() })).filter(obj => obj.substring !== "");
     res.sort((a, b) => b.score - a.score);
     let ret = [], seen = new Set();
