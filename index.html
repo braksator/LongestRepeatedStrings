@@ -15,30 +15,34 @@
 <body>
   <div class="container">
     <h1>Longest Repeated Strings</h1>
-    <p class="intro">Generates a report about the longest repeated substrings in supplied text,<br>weighted by how much space the string takes up overall (length * occurences).</p>
+    <p class="intro">Finds duplicated text strings and generates a report about the longest substrings or most frequent words in supplied text,<br>weighted by how much space the string takes up overall (length * occurences).</p>
     <p>Paste text or select files to analyze!</p>
     <textarea id="textInput" placeholder="Enter text here..."></textarea>
     <input type="file" id="fileInput" multiple>
     <div class="opts">
       <h2>Options</h2>
-      <label class="hr">Min match length: <input type="number" id="minLen" value="4"></label>
-      <label class="hr">Max match length: <input type="number" id="maxLen" value="120"></label>
+      <label title="The minimum length of substrings to consider." class="hr">Min match length: <input type="number" id="minLen" value="4"></label>
+      <label title="The maximum length of substrings to consider." class="hr">Max match length: <input type="number" id="maxLen" value="120"></label>
       <br>
-      <label class="hr">Min occurrences: <input type="number" id="minOcc" value="3"></label>
-      <label class="hr">Max results: <input type="number" id="maxRes" value="50"></label>
+      <label title="The minimum number of occurrences a substring must have to be included." class="hr">Min occurrences: <input type="number" id="minOcc" value="3"></label>
+      <label title="The maximum length of substrings to consider." class="hr">Max results: <input type="number" id="maxRes" value="50"></label>
       <br>
-      <label>Words to omit (one per line):</label>
+      <label title="Per-occurence score penalty, helps order results for deduplication.  You'd probably want this to be minLen or higher." class="fr">Per-occurence score penalty: <input type="number" id="penalty" value="0"></label>
+      <br>
+      <label title="Substrings to omit from the results. Can be used to ignore accepted long/frequent words.">Words to omit (one per line):</label>
       <br>
       <textarea id="omit" style="height: 40px; field-sizing: content; width: 50%;"></textarea>
       <br>
-      <label><input type="checkbox" id="trim"> Trim whitespace</label>
-      <label><input type="checkbox" id="cleanText"> Break match on symbols</label>
-      <label><input type="checkbox" id="splitWords"> Find only whole words</label>
-      <label><input type="checkbox" id="wordBound"> Word boundaries</label>
+      <label title="Trims whitespace from results."><input type="checkbox" id="trim"> Trim whitespace</label>
+      <label title="Break match on symbols."><input type="checkbox" id="cleanText"> Break match on symbols</label>
+      <label title="Find only whole words."><input type="checkbox" id="splitWords"> Find only whole words</label>
+      <label title="Restricts matches to word boundaries."><input type="checkbox" id="wordBound"> Word boundaries</label>
       <br>
-      <label class="cr">Delimiter: <input type="text" id="delim" size="2" value="★"></label>
-      <label class="cr">Open paren: <input type="text" id="open" size="2" value="⦅"></label>
-      <label class="cr">Close paren: <input type="text" id="close" size="2" value="×⦆"></label>
+      <label title="Character/s to insert between each result." class="cr">Delimiter: <input type="text" id="delim" size="2" value="★"></label>
+      <label title="Character/s to insert before the repeat count." class="cr">Open paren: <input type="text" id="open" size="2" value="⦅"></label>
+      <label title="Character/s to insert after the repeat count." class="cr">Close paren: <input type="text" id="close" size="2" value="×⦆"></label>
+      <br>
+      <label title="Can be used to concatenate texts with a special char." class="fr">Break on char: <input type="text" id="break" size="2" value=""></label>
     </div>
     <button class="analyze" onclick="analyze()">Analyze</button>
     <h3>Results:</h3>
@@ -80,6 +84,7 @@
         maxLen: +document.getElementById('maxLen').value,
         minOcc: +document.getElementById('minOcc').value,
         maxRes: +document.getElementById('maxRes').value,
+        penalty: +document.getElementById('penalty').value,
         omit: document.getElementById('omit').value.split('\n').map(o => o.trim()).filter(Boolean),
         trim: document.getElementById('trim').checked,
         clean: document.getElementById('cleanText').checked,
