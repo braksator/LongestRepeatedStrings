@@ -15,7 +15,7 @@
 <body>
   <div class="container">
     <h1>Longest Repeated Strings</h1>
-    <p class="intro">Finds duplicated text strings and generates a report about the longest substrings or most frequent words in supplied text,<br>weighted by how much space the string takes up overall (length * occurences).</p>
+    <p class="intro">Finds <em>duplicated text</em> strings and generates a report about the <em>longest substrings</em> or <em>most frequent words</em> in supplied text, weighted by how much space the string takes up overall (length * occurences).</p>
     <p>Paste text or select files to analyze!</p>
     <textarea id="textInput" placeholder="Enter text here..."></textarea>
     <input type="file" id="fileInput" multiple>
@@ -41,8 +41,7 @@
       <label title="Character/s to insert between each result." class="cr">Delimiter: <input type="text" id="delim" size="2" value="★"></label>
       <label title="Character/s to insert before the repeat count." class="cr">Open paren: <input type="text" id="open" size="2" value="⦅"></label>
       <label title="Character/s to insert after the repeat count." class="cr">Close paren: <input type="text" id="close" size="2" value="×⦆"></label>
-      <br>
-      <label title="Can be used to concatenate texts with a special char." class="fr">Break on char: <input type="text" id="break" size="2" value=""></label>
+      <label title="Can be used to concatenate texts with a special char." class="cr">Break on char: <input type="text" id="break" size="2" value="" placeholder="none"></label>
     </div>
     <button class="analyze" onclick="analyze()">Analyze</button>
     <h3>Results:</h3>
@@ -67,7 +66,7 @@
     .opts { background-color: #f2f2f2; padding: 1em; margin: 1em; border-radius: 10px }
     a { color: #bbb; }
     .analyze { padding: .25em 2em; color: #fff; background: #369c17; border: 0; border-radius: 5px; &:hover { background: #40aa20;} }
-    .intro { opacity: .4; font-size: 1.2em; font-style: italic; }
+    .intro { opacity: .6; font-size: 2.2em; font-family: Garamond,Baskerville,Baskerville Old Face,Hoefler Text,Times New Roman,serif; transform: scaleX(.8);  }
     .cr { font-size: .8em; input { font-size: .8em; }}
   </style>
   <script>
