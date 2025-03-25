@@ -37,7 +37,7 @@ let lrs = module.exports = {
           (!opts.wb || !!txt.match(new RegExp(`[^a-zA-Z0-9\\s\n]${esc(substr)}|\\n${esc(substr)}`, 'g'))) &&
           !opts.omit.includes(substr.toLowerCase())
         )
-        .map(substr => ({ substring: substr, count: strings[substr], score: Math.max(1, (substr.length - 3)) * Math.max(1, strings[substr] - 1) }));
+        .map(substr => ({ substring: substr, count: strings[substr], score: substr.length * strings[substr] }));
     if (opts.trim) res = res.map(obj => ({ ...obj, substring: obj.substring.trim() })).filter(obj => obj.substring !== "");
     res.sort((a, b) => b.score - a.score);
     let ret = [], seen = new Set();
