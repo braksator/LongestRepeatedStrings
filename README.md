@@ -63,8 +63,7 @@ console.log(results);
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results. Can be used to ignore accepted long/frequent words.
   - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
   - `clean` (Boolean, default: `true`): If `true`, replace symbols in input with spaces.
-  - `words` (Boolean, default: `true`): If `true`, splits the input up by words.
-  - `wb` (Boolean, default: `true`): If `true`, restricts matches to start of word boundaries.
+  - `words` (Boolean, default: `true`): If `true`, matches whole words.
   - `break` (Array, default: `[]`): An array of substrings to break matching on.
   Can be used to concatenate an array of texts with a special char.
   - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
