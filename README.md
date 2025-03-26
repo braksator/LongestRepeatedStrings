@@ -61,10 +61,10 @@ console.log(results);
   - `maxLen` (Number, default: 120): The maximum length of substrings to consider.
   - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results. Can be used to ignore accepted long/frequent words.
-  - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
-  - `clean` (Boolean, default: `true`): If `true`, replace symbols in input with spaces.
+  - `clean` (Boolean, default: `true`): If `true`, Splits input on symbol chars.
   - `words` (Boolean, default: `true`): If `true`, matches whole words.
-  - `break` (Array, default: `[]`): An array of substrings to break matching on.
+  - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
+  - `break` (Array, default: `[]`): An array of substrings by which to split input.
   Can be used to concatenate an array of texts with a special char.
   - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
 
