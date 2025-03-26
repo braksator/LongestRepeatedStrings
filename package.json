@@ -1,6 +1,6 @@
 {
   "name": "longestrepeatedstrings",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Finds duplicated text strings and generates a report about the longest substrings or most frequent words in supplied text",
   "main": "index.js",
   "scripts": {
