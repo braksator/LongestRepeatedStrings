@@ -11,7 +11,7 @@ takes up overall (length * occurences).
 
 🧵 [Try an online demo](http://braksator.github.io/lrs)
 
-(This module was designed to analyze javascript code for refactoring opportunities)
+(This module was designed to analyze javascript code for refactoring opportunities in a Gulp task)
 
 ## Stand-alone usage
 
@@ -138,6 +138,49 @@ console.log(report);
 
 - Results are sorted by a score, which is calculated based on the length of the substring and the number of occurrences.
 - This package is used in [JCrush](https://www.npmjs.com/package/jcrush); a Javascript code deduplicator.
+
+## Gulp usage
+
+
+In your `gulpfile.mjs`, use **Longest Repeated Strings** as a Gulp plugin:
+
+#### Step 1: Import **Longest Repeated Strings**
+
+```javascript
+import LRS from 'longestrepeatedstrings';
+```
+
+#### Step 2: Create a Gulp Task for Longest Repeated Strings
+
+```javascript
+var analyzeStrings = true;
+gulp.task('analyze', function (done) {
+  if (analyzeStrings) {
+    LRS.filesReport(LRS.files(['./script.min.js', './script.min.css', './index.html'], {
+      clean: 1, words: 1,
+      omit: [
+        // This is a list of words that we just accept we've used a lot in the content, and we don't need to see them appear in repeated-strings reports. (supply all with lower-case)
+        'consciousness', 'enlightenment', 'ephemeral', 'watching', 'observing',
+        'communication', 'inspiring', 'realizing', 'uplifting', 'illusion',
+      ],
+    }), 1, {delim: ", "});
+    analyzeStrings = 0;
+  }
+  setTimeout(() => {analyzeStrings = 1}, 1000 * 60 * 60); // Only run once an hour.
+  done(); // Signal completion
+});
+```
+
+#### Step 3: Run **Longest Repeated Strings** After Minification
+
+To run **Longest Repeated Strings** after your minification tasks, add Longest Repeated Strings in series after other tasks, such as in this example:
+
+```javascript
+gulp.task('default', gulp.series(
+  gulp.parallel('minify-css', 'minify-js', 'minify-html'), // Run your minification tasks first
+  'analyze' // Then run LRS
+));
+```
 
 
 ## Contributing
