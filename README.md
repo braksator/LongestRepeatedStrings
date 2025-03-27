@@ -64,6 +64,8 @@ console.log(results);
   - `break` (Array, default: `[]`): An array of substrings by which to split input.
   Can be used to concatenate an array of texts with a special char.
   - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
+  - `progress` (String, default: ''): A HTML ID element to insert progress counter into.
+  - `progText` (String, default: 'Progress: '): Text to prepend to progress counters.
 
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
