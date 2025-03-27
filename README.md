@@ -31,9 +31,6 @@ or with Yarn:
 
 `yarn add longestrepeatedstrings`
 
-It is recommend to use a package locking system like Yarn in case a change is
-introduced into this project that makes it incompatible with your encoded data.
-
 ## Usage
 
 Include Longest Repeated Strings in your project:
@@ -148,4 +145,4 @@ console.log(report);
 https://github.com/braksator/LongestRepeatedStrings
 
 In lieu of a formal style guide, take care to maintain the existing coding
-style. Add tests for coverage and explicitly test bugs and features.
+style.
