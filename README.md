@@ -61,7 +61,7 @@ console.log(results);
   - `clean` (Boolean, default: `true`): If `true`, Splits input on symbol chars.
   - `words` (Boolean, default: `true`): If `true`, matches whole words.
   - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
-  - `break` (Array, default: `[]`): An array of substrings by which to split input.
+  - `break` (Array, default: `[]`): An array of substrings by which to split input.  (Note: Semi-colons and newlines are handled automatically)
   Can be used to concatenate an array of texts with a special char.
   - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
 
@@ -137,6 +137,7 @@ console.log(report);
 ### Notes
 
 - Results are sorted by a score, which is calculated based on the length of the substring and the number of occurrences.
+- This package is used in [JCrush](https://www.npmjs.com/package/jcrush); a Javascript code deduplicator.
 
 
 ## Contributing
