@@ -18,7 +18,7 @@ let lrs = module.exports = {
       progObj = {v: `${progText}${percent}`};
       if (typeof process !== "undefined" && process.stdout && process.stdout.write) {
         process.stdout.write(`\r${progObj.v}`);
-        final && process.stdout.write(`\n`);
+        final && process.stdout.write(`\r`);
       }
     }
   },
@@ -80,6 +80,7 @@ let lrs = module.exports = {
         }
       }
     }
+    lrs.prog(totalChars, totalChars, opts, progObj, 1);
 
     let res = Object.keys(strings)
       .filter(substr => strings[substr] >= opts.minOcc && !opts.omit.includes(substr.toLowerCase()))
@@ -93,8 +94,6 @@ let lrs = module.exports = {
         seen.add(r.substring);
       }
     }
-
-    setTimeout(() => lrs.prog(totalChars, totalChars, opts, progObj, 1), 0);
 
     return ret.slice(0, opts.maxRes);
   },
