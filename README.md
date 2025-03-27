@@ -64,9 +64,9 @@ console.log(results);
   - `break` (Array, default: `[]`): An array of substrings by which to split input.
   Can be used to concatenate an array of texts with a special char.
   - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
-  - `prog` (Boolean, default: `false`): Displays a progress counter, defaults to showing in terminal.
-  - `progID` (String, default: null): A HTML ID element to insert progress counter into.
+  - `prog` (Boolean, default: `false`): Displays a progress counter, defaults to showing in terminal. (Slows things down though)
   - `progText` (String, default: null): Text to prepend to progress counter.
+- `prog` (Object, optional): Pass in and your code can access progress at `prog.v` using an interval, if opts.prog is `true`.
 
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
