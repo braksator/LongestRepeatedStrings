@@ -159,7 +159,9 @@ gulp.task('analyze', function (done) {
     LRS.filesReport(LRS.files(['./script.min.js', './script.min.css', './index.html'], {
       clean: 1, words: 1,
       omit: [
-        // This is a list of words that we just accept we've used a lot in the content, and we don't need to see them appear in repeated-strings reports. (supply all with lower-case)
+        // This is a list of words that we just accept we've used a lot in the
+        // content, and we don't need to see them appear in repeated-strings
+        // reports. (supply all with lower-case)
         'consciousness', 'enlightenment', 'ephemeral', 'watching', 'observing',
         'communication', 'inspiring', 'realizing', 'uplifting', 'illusion',
       ],
