@@ -55,7 +55,7 @@ console.log(results);
   - `maxRes` (Number, default: 50): The maximum number of results to return.
   Restricts the final list to highest scoring results and does not speed up processing.
   - `minLen` (Number, default: 4): The minimum length of substrings to consider.
-  - `maxLen` (Number, default: 120): The maximum length of substrings to consider.
+  - `maxLen` (Number, default: 40): The maximum length of substrings to consider.
   - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results. Can be used to ignore accepted long/frequent words.
   - `clean` (Boolean, default: `true`): If `true`, Splits input on symbol chars.
