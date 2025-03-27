@@ -166,9 +166,9 @@ gulp.task('analyze', function (done) {
         'communication', 'inspiring', 'realizing', 'uplifting', 'illusion',
       ],
     }), 1, {delim: ", "});
-    analyzeStrings = 0;
+    analyzeStrings = false;
   }
-  setTimeout(() => {analyzeStrings = 1}, 1000 * 60 * 60); // Only run once an hour.
+  setTimeout(() => {analyzeStrings = true}, 1000 * 60 * 60); // Only run once an hour.
   done(); // Signal completion
 });
 ```
