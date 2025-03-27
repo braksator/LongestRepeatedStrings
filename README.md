@@ -156,7 +156,7 @@ import LRS from 'longestrepeatedstrings';
 var analyzeStrings = true;
 gulp.task('analyze', function (done) {
   if (analyzeStrings) {
-    LRS.filesReport(LRS.files(['./script.min.js', './script.min.css', './index.html'], {
+    LRS.filesReport(LRS.files(['./script.min.js', './styles.min.css', './index.html'], {
       clean: 1, words: 1,
       omit: [
         // This is a list of words that we just accept we've used a lot in the
