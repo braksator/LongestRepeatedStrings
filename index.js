@@ -12,21 +12,21 @@ let lrs = module.exports = {
 
   // Handles progress counter.
   prog: (processed, total, opts) => {
-    let percent = ((processed / total) * 100).toFixed(2) + "%",
-      progText = opts.progText;
-    if (opts.progress) {
-      let progressElement = document.getElementById(opts.progress);
-      if (progressElement) {
-        progressElement.textContent = `${progText}${percent}`;
+    if (opts.prog) {
+      let percent = ((processed / total) * 100).toFixed(2) + "%",
+        progText = opts.progText;
+      if (opts.progID) {
+        let progressElement = document.getElementById(opts.progID);
+        if (progressElement) progressElement.textContent = `${progText}${percent}`;
       }
-    } else if (typeof process !== "undefined" && process.stdout && process.stdout.write) {
-      process.stdout.write(`\r${progText}${percent}`);
+      else if (typeof process !== "undefined" && process.stdout && process.stdout.write)
+        process.stdout.write(`\r${progText}${percent}`);
     }
   },
 
   // Finds repeated substrings in a piece of text.
   text: (txt, opts) => {
-    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 120, minOcc: 3, omit: [], trim: 1, clean: 1, words: 1, break: [], penalty: 0, progress: 0, progText: 'Progress: ' }, ...opts };
+    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 120, minOcc: 3, omit: [], trim: 1, clean: 1, words: 1, break: [], penalty: 0, prog: 0, progID: null, progText: null }, ...opts };
     txt = opts.clean ? txt.replace(/[^\w]/g, '\0') : txt;
     let strings = {},
       segments = (opts.words || opts.break.length) ?
