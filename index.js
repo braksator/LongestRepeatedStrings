@@ -16,7 +16,7 @@ let lrs = module.exports = {
     txt = opts.clean ? txt.replace(/[^\w]/g, '\0') : txt;
     let strings = {}, len, substr, i, j, seg,
       segments = (opts.words || opts.break.length) ?
-      txt.split(new RegExp(`(${opts.words ? '\\s+' : ''}${opts.break.length ? opts.break.join('|') : ''}|\\0)|(?<=${opts.split.length ? opts.split.join('|') : ''})`))
+      txt.split(new RegExp(`(${opts.words ? '\\s+' : ''}${opts.break.length ? opts.break.join('|') : ''}|\\0)|(?<=${opts.split.length ? opts.split.join('|') : ''})\\s*`))
       .filter(segment => segment !== '' && segment !== '\u0000')
         : txt.split('\0').filter(segment => segment !== '');
 
