@@ -63,6 +63,7 @@ console.log(results);
   - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
   - `break` (Array, default: `[]`): Splits input on these strings and won't include them in matches.
   Can be used to concatenate an array of texts with a special char.
+  - `escSafe` (Boolean, default: `true`): Will take extra care around escaped characters.
   - `split` (Array, default: `[]`): Splits input after specified strings and may include them in matches as well as any whitespace afterwards.
   - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
 
