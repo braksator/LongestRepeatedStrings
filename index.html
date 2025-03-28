@@ -37,7 +37,8 @@
       <label title="Matches on whole words."><input type="checkbox" id="words" checked> Whole words</label>
       <label title="Trims white space from results."><input type="checkbox" id="trim" checked> Trim white space</label>
       <br>
-      <label title="Can be used to concatenate texts with a special char." class="fr">Split input on char: <input type="text" id="break" size="2" value=";" placeholder="none"></label>
+      <label title="Can be used to concatenate texts with a special char." class="fr">Split input on char: <input type="text" id="break" size="2" value="" placeholder="none"></label>
+      <label title="Breaking up input helps with processing." class="fr">Split input after: <input type="text" id="split" size="2" value=";" placeholder="none"></label>
       <br>
       <div class="report-settings">
         <h4>Report settings</h4>
@@ -104,6 +105,7 @@
         clean: document.getElementById('clean').checked,
         words: document.getElementById('words').checked,
         break: document.getElementById('break').value ? [document.getElementById('break').value] : [],
+        break: document.getElementById('split').value ? [document.getElementById('split').value] : [],
       };
     }
     function analyzeText() {

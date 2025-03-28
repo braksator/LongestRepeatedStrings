@@ -61,8 +61,9 @@ console.log(results);
   - `clean` (Boolean, default: `true`): If `true`, Splits input on symbol chars.
   - `words` (Boolean, default: `true`): If `true`, matches whole words.
   - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
-  - `break` (Array, default: `[]`): An array of substrings by which to split input.  (Note: Semi-colons and newlines are handled automatically)
+  - `break` (Array, default: `[]`): Splits input on these strings and won't include them in matches.
   Can be used to concatenate an array of texts with a special char.
+  - `split` (Array, default: `[]`): Splits input after specified strings and may include them in matches.
   - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.

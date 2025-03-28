@@ -12,11 +12,12 @@ let lrs = module.exports = {
 
   // Finds repeated substrings in a piece of text.
   text: (txt, opts) => {
-    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 40, minOcc: 3, omit: [], trim: 1, clean: 1, words: 1, break: [], penalty: 0 }, ...opts };
+    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 40, minOcc: 3, omit: [], trim: 1, clean: 1, words: 1, break: [], split: [], penalty: 0 }, ...opts };
     txt = opts.clean ? txt.replace(/[^\w]/g, '\0') : txt;
     let strings = {}, len, substr, i, j, seg,
       segments = (opts.words || opts.break.length) ?
-        txt.split(new RegExp(`(${opts.words ? '\\s+' : ''}${opts.break.length ? opts.break.join('|') : ''}|\\0)`)).filter(segment => segment !== '' && segment !== '\u0000')
+      txt.split(new RegExp(`(${opts.words ? '\\s+' : ''}${opts.break.length ? opts.break.join('|') : ''}|\\0)|(?<=${opts.split.length ? opts.split.join('|') : ''})`))
+      .filter(segment => segment !== '' && segment !== '\u0000')
         : txt.split('\0').filter(segment => segment !== '');
 
     if (opts.words) {
