@@ -20,17 +20,19 @@ let lrs = module.exports = {
     opts.split = opts.split.map(lrs.escapeRegex);
     opts.break = opts.break.map(lrs.escapeRegex);
     txt = opts.clean ? txt.replace(/[^\w]/g, ' ') : txt;
-    let strings = {}, len, substr, segIndex, seg, segIdx, charIdx, i, j, currentIndex,
+    console.log(opts);
+    let strings = {}, len, substr, segIndex, seg, segIdx, charIdx, i, j,
       segments = (opts.words || opts.break.length || opts.split.length) ?
         txt.split(new RegExp(
           '(' +
             (opts.words ? '\\s+' : '') +
-            (opts.break.length ? opts.break.join('|') : '') +
+            (opts.break.length ? `(?=${opts.break.join('|')})` + opts.break.join('|') : '') +
           ')' +
           (opts.split.length ? `|(?<=${opts.split.join('|')})(\\s*)` : '')
         ))
-        .filter(segment => segment && segment !== '\u0000')
+        .filter(segment => segment && !opts.break.includes(segment))
       : [txt];
+    console.log(segments);
     if (opts.escSafe) {
       segments = segments.map((segment, index, array) => {
         if (index < array.length - 1 && segment.endsWith('\\') && segment.length > 1 && segment[segment.length - 2] != '\\') {
