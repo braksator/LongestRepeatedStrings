@@ -15,7 +15,7 @@ let lrs = module.exports = {
 
   // Finds repeated substrings in a piece of text.
   text: (txt, opts) => {
-    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 40, minOcc: 3, omit: [], trim: 1,
+    opts = { ...{ maxRes: 50, minLen: 4, maxLen: 40, minOcc: 2, omit: [], trim: 1,
       clean: 0, words: 1, break: [], split: [' ', ',', '.', '\n'], escSafe: 1, penalty: 0 }, ...opts };
     opts.split = opts.split.map(lrs.escapeRegex);
     opts.break = opts.break.map(lrs.escapeRegex);
