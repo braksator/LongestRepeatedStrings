@@ -63,8 +63,8 @@ console.log(results);
   - `break` (Array, default: `[]`): Splits input ON these strings and won't include them in matches.
   Can be used to concatenate an array of texts with a special char.
   - `escSafe` (Boolean, default: `true`): Will take extra care around escaped characters.  May as well leave this on.
-  - `clean` (Boolean, default: `false`): If `true`, strips all symbols from input.
   - `words` (Boolean, default: `true`): If `true`, matches only whole words (fastest method).
+  - `clean` (Boolean, default: `false`): If `true`, strips all symbols from input.
   - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results. Can be used to ignore accepted long/frequent words.
   as `minLen`, for example, will cause longer substrings to appear earlier in the results.  Negative penalty will favor more frequent substrings.
