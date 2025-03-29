@@ -123,7 +123,7 @@
     }
     function getOpts() {
       let split = [...document.querySelectorAll('input[name="split"]:checked')].map(cb => cb.value);
-      document.getElementById('split-custom').value && split.push(document.getElementById('split').value);
+      document.getElementById('split-custom').value && split.push(document.getElementById('split-custom').value);
       return {
         minLen: +document.getElementById('minLen').value,
         maxLen: +document.getElementById('maxLen').value,
