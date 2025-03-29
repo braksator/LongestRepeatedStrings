@@ -28,9 +28,9 @@ let lrs = module.exports = {
             (opts.break.length ? opts.break.join('|') : '') +
             (opts.clean ? '|\\0' : '') +
           ')' +
-          (opts.split.length ? `|(?<=${opts.split.join('|')})\\s*` : '')
+          (opts.split.length ? `|(?<=${opts.split.join('|')})(\\s*)` : '')
         ))
-        .filter(segment => segment && segment !== '\u0000' && !opts.break.includes(segment))
+        .filter(segment => segment && segment !== '\u0000')
       : opts.clean ? txt.split('\0').filter(segment => segment) : [txt];
     if (opts.escSafe) {
       segments = segments.map((segment, index, array) => {
@@ -51,6 +51,7 @@ let lrs = module.exports = {
     else {
       for (segIndex = 0; segIndex < segments.length; segIndex++) {
         seg = segments[segIndex];
+        if (opts.break.includes(seg)) continue;
         len = seg.length;
         for (i = 0; i < len; i++) {
           substr = "";
@@ -62,6 +63,7 @@ let lrs = module.exports = {
             }
             if (segIdx >= segments.length) break;
             substr += segments[segIdx][charIdx];
+            if (segIdx < segments.length - 1 && opts.break.includes(segments[segIdx + 1])) break;
             if (substr.length >= opts.minLen) {
               if (opts.escSafe && substr.endsWith('\\') && substr.length > 1 && substr[substr.length - 2] != '\\') continue;
               if (!strings[substr]) strings[substr] = 0;
