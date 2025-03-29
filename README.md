@@ -58,14 +58,16 @@ console.log(results);
   - `maxLen` (Number, default: 40): The maximum length of substrings to consider.
   - `minOcc` (Number, default: 3): The minimum number of occurrences a substring must have to be included.
   - `omit` (Array, default: `[]`): An array of substrings to omit from the results. Can be used to ignore accepted long/frequent words.
-  - `clean` (Boolean, default: `true`): If `true`, Splits input on symbol chars.
-  - `words` (Boolean, default: `true`): If `true`, matches whole words.
+  - `clean` (Boolean, default: `false`): If `true`, strips all symbols from input.
+  - `words` (Boolean, default: `true`): If `true`, matches only whole words (fastest method).
   - `trim` (Boolean, default: `true`): If `true`, trims white space from results.
-  - `break` (Array, default: `[]`): Splits input on these strings and won't include them in matches.
+  - `break` (Array, default: `[]`): Splits input ON these strings and won't include them in matches.
   Can be used to concatenate an array of texts with a special char.
-  - `escSafe` (Boolean, default: `true`): Will take extra care around escaped characters.
-  - `split` (Array, default: `[]`): Splits input after specified strings and may include them in matches as well as any whitespace afterwards.
-  - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.
+  - `split` (Array, default: `[' ', ',', '.', '\n']`): Splits input after specified strings.  If not using the `words` and `clean`
+  options, settings THIS up properly for expected input will be key to making this module effective.
+  - `escSafe` (Boolean, default: `true`): Will take extra care around escaped characters.  May as well leave this on.
+  - `penalty` (Number, default: 0): Per-occurence score penalty, helps order results for deduplication.  Setting to the same
+  as `minLen`, for example, will cause longer substrings to appear earlier in the results.  Negative penalty will favor more frequent substrings.
 
 **Returns**: An array of objects containing the repeated substrings, their count, and a score for each.
 
