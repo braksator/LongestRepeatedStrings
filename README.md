@@ -57,7 +57,7 @@ console.log(results);
   - `minLen` (Number, default: `4`): The minimum length of substrings to consider.
   - `maxLen` (Number, default: `40`): The maximum length of substrings to consider.
   - `minOcc` (Number, default: `2`): The minimum number of occurrences a substring must have to be included.
-  - `penalty` (Number, default: `0`): Per-occurence score penalty, helps order results for deduplication.  Setting to the same
+  - `penalty` (Number, default: `0`): Per-occurence score penalty, helps order results for deduplication.
   - `split` (Array, default: `[' ', ',', '.', '\n']`): Splits input after specified strings.  If not using the `words` and `clean`
   options, settings THIS up properly for expected input will be key to making this module effective.
   - `break` (Array, default: `[]`): Splits input ON these strings and won't include them in matches.
